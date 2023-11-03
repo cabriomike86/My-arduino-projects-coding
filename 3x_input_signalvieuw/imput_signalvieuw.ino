@@ -14,28 +14,26 @@ void setup(void) {
   tft.reset();
   uint16_t identifier = tft.readID();
   tft.begin(identifier);
-  tft.setRotation(3);
+  tft.setRotation(0);
   tft.fillScreen(BLACK);
 
 
-  tft.fillRect(0, 0, 320, 240, BLACK);
-  tft.drawRect(1, 0, 319, 240, WHITE);
-  tft.drawRect(9, 9, 202, 21, WHITE);
-  tft.drawRect(9, 49, 202, 21, WHITE);
-  tft.drawRect(9, 89, 202, 21, WHITE);
-  tft.drawLine(10, 90, 10, 240, BLUE);
-  tft.drawLine(0, 230, 320, 230, RED);
+  tft.fillRect(0, 0,320 , 240, BLACK);
+  tft.drawRect(1, 0, 239, 318, WHITE);
+  tft.drawRect(9, 9, 181, 71, WHITE);
+  tft.drawLine(10,90, 10, 240, BLUE);
+  tft.drawLine(1, 230, 239, 230, RED);
 
   tft.setTextColor(GREEN);
-  tft.setTextSize(1.5);
-  tft.setCursor(215, 10); tft.println("%100");
-  tft.setCursor(215, 20); tft.println("RSSI 1");
+  tft.setTextSize(1);
+  tft.setCursor(210, 10); tft.println("Vrx1");
+  tft.setCursor(210, 20); tft.println("RSSI ");
 
-  tft.setCursor(215, 50); tft.println("%100");
-  tft.setCursor(215, 60); tft.println("RSSI 2");
+  tft.setCursor(210, 36); tft.println("Vrx2");
+  tft.setCursor(210, 46); tft.println("RSSI ");
 
-  tft.setCursor(215, 90); tft.println("%100");
-  tft.setCursor(215, 100); tft.println("RSSI 3");
+  tft.setCursor(210, 61); tft.println("Vrx3");
+  tft.setCursor(210, 71); tft.println("RSSI ");
 }
 
 void loop(void) {
@@ -44,18 +42,16 @@ void loop(void) {
     values[i] = analogRead(A0 + i); // Read analog inputs A0, A1, and A2
   }
 
-  tft.fillRect(10, 10, map(values[0], 0, 1023, 1, 200), 19, YELLOW);
-  tft.fillRect(10, 50, map(values[1], 0, 1023, 1, 200), 19, YELLOW);
-  tft.fillRect(10, 90, map(values[2], 0, 1023, 1, 200), 19, YELLOW);
-
+  tft.fillRect(10, 10, map(values[0], 0, 1023, 1, 180), 19, YELLOW);
+  tft.fillRect(10, 20, map(values[1], 0, 1023, 1, 180), 29, YELLOW);
+  tft.fillRect(10, 40, map(values[2], 0, 1023, 1, 180), 39, YELLOW);
   // Clear the rest of the bars
-  tft.fillRect(map(values[0], 0, 1023, 1, 200) + 9, 10, 200 - map(values[0], 0, 1023, 1, 200), 19, BLACK);
-  tft.fillRect(map(values[1], 0, 1023, 1, 200) + 9, 50, 200 - map(values[1], 0, 1023, 1, 200), 19, BLACK);
-  tft.fillRect(map(values[2], 0, 1023, 1, 200) + 9, 90, 200 - map(values[2], 0, 1023, 1, 200), 19, BLACK);
-
-  tft.setCursor(10, 15); tft.println(values[0]);
-  tft.setCursor(10, 55); tft.println(values[1]);
-  tft.setCursor(10, 95); tft.println(values[2]);
+  tft.fillRect(map(values[0], 0, 1023, 1, 180) + 9, 10, 180 - map(values[0], 0, 1023, 1, 180), 19, BLACK);
+  tft.fillRect(map(values[1], 0, 1023, 1, 180) + 9, 20, 180 - map(values[1], 0, 1023, 1, 180), 29, BLACK);
+  tft.fillRect(map(values[2], 0, 1023, 1, 180) + 9, 40, 180 - map(values[2], 0, 1023, 1, 180), 39, BLACK);
+  tft.setCursor(30, 16); tft.println(values[0]);
+  tft.setCursor(30, 40); tft.println(values[1]);
+  tft.setCursor(30, 65); tft.println(values[2]);
 
   delay(10);
 }
